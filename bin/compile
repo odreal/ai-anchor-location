@@ -33,6 +33,15 @@ APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state
 mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 
-echo "-----> Installing screen... "
+echo "-----> Installing docker... "
 apt-get $APT_OPTIONS update -y | indent
 apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall docker.io
+
+echo "-----> Installing git... "
+apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall git
+
+echo "-----> Cloning openvslam... "
+git clone https://github.com/odreal/openvslam.git openvslam
+
+cd openvslam
+docker build -t openvslam-socket -f Dockerfile.socket .
