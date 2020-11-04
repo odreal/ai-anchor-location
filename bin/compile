@@ -35,6 +35,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing docker... "
 apt-get $APT_OPTIONS update -y | indent
+sudo apt-get install debconf --reinstall
 sudo apt-get $APT_OPTIONS -y install --reinstall docker.io
 
 echo "-----> Enabling process of docker... "
