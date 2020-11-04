@@ -35,11 +35,11 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing docker... "
 apt-get $APT_OPTIONS update -y | indent
-apt-get $APT_OPTIONS -y install --reinstall docker.io
+apt-get $APT_OPTIONS -y install --reinstall docker-ce
 
 echo "-----> Enabling process of docker... "
-systemctl start docker
-systemctl enable docker
+#systemctl start docker
+#systemctl enable docker
 
 echo "-----> Testing docker... "
 docker --version
