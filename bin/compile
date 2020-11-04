@@ -36,7 +36,12 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 echo "-----> Installing docker... "
 apt-get $APT_OPTIONS update -y | indent
 apt-get $APT_OPTIONS -y install --reinstall docker.io
-apt-get $APT_OPTIONS -y install --reinstall docker
+
+systemctl start docker
+systemctl enable docker
+
+echo "-----> Testing docker... "
+docker --version
 
 echo "-----> Installing git... "
 apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall git
